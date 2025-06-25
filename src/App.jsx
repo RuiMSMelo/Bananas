@@ -29,7 +29,7 @@ function Box({ z }) {
 }
 
 function Banana(props) {
-    const { scene } = useGLTF('./banana_00005-v1.glb')
+    const { scene } = useGLTF('./banana-v1.glb')
     console.log(scene)
 
     return <primitive object={scene} {...props} />
