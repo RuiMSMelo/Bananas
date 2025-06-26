@@ -30,7 +30,7 @@ function Box({ z }) {
 
 function Banana(props) {
     const { scene } = useGLTF('./banana-v1.glb')
-    scene.children[0].material.emissive.r = 1 //making model warmer with more red
+    // scene.children[0].material.emissive.r = 1 //making model warmer with more red
 
     return <primitive object={scene} {...props} />
 }
