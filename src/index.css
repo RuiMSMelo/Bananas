@@ -21,9 +21,11 @@ body,
 h1 {
     font-size: 8em;
     margin: 0;
+    line-height: 0.75;
 }
 
 h2 {
+    line-height: 3;
     font-size: 1.1em;
 }
 
