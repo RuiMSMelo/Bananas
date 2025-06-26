@@ -7,3 +7,30 @@ body,
     height: 100%;
     overflow: hidden;
 }
+
+.text {
+    font-family: 'Playfair Display', serif;
+    z-index: 1;
+    top: 6em;
+    left: 3em;
+    position: fixed;
+    text-align: left;
+    transform: scaleY(1.5);
+}
+
+h1 {
+    font-size: 8em;
+    margin: 0;
+}
+
+h2 {
+    font-size: 1.1em;
+}
+
+img {
+    position: absolute;
+    z-index: 1;
+    max-width: 100%;
+    top: 30%;
+    left: 40%;
+}
