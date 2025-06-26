@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { Suspense, useRef, useState } from 'react'
+import { Suspense, useMemo, useRef, useState } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Environment, useGLTF } from '@react-three/drei'
 import { DepthOfField, EffectComposer } from '@react-three/postprocessing'
@@ -9,6 +9,7 @@ function Banana({ z }) {
     const ref = useRef()
 
     const { nodes, materials } = useGLTF('/banana-v1-transformed.glb')
+    const bananaMaterial = useMemo(() => materials.skin.clone(), [])
 
     const { viewport, camera } = useThree()
     const { width, height } = viewport.getCurrentViewport(camera, [0, 0, z])
@@ -22,18 +23,33 @@ function Banana({ z }) {
     })
 
     useFrame((state, delta) => {
+        if (!ref.current) return
+
+        // Fade in opacity
+        const mat = ref.current.material
+        if (mat.opacity < 1) {
+            mat.transparent = true
+            mat.opacity = Math.min(mat.opacity + delta * 0.5, 1) // slower fade
+        }
+
+        // Animate position
         ref.current.position.set(
             data.x * width,
             (data.y += 0.0025 * delta * 60),
             z
         )
+
+        // Animate rotation
         ref.current.rotation.set(
             (data.rX += 0.001 * delta * 60),
             (data.rY += 0.001 * delta * 60),
             (data.rZ += 0.001 * delta * 60)
         )
+
+        // Reset if off-screen
         if (data.y > height) {
             data.y = -height
+            mat.opacity = 0 // restart fade after looping
         }
     })
 
@@ -41,24 +57,26 @@ function Banana({ z }) {
         <mesh
             ref={ref}
             geometry={nodes.banana.geometry}
-            material={materials.skin}
+            material={bananaMaterial}
             rotation={[-Math.PI / 2, 0, 0]}
             material-emissive='orange'
+            material-transparent={true}
+            material-opacity={0}
         />
     )
 }
 
-export default function App({ count = 100, depth = 80 }) {
+export default function App({ count = 80, depth = 75 }) {
     return (
         <>
             <div className='text'>
                 <h1>
                     LANDING <br />
-                    PAGE -
+                    PAGE —
                 </h1>
-                <h2>with React and Threejs -</h2>
+                <h2>with React and Threejs —</h2>
             </div>
-            <img src='./public/WarholBanana-removebg-preview.png' />
+            <img src='./WarholBanana-removebg-preview.png' />
 
             <Canvas
                 gl={{ alpha: false }}
