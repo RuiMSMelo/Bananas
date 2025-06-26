@@ -8,7 +8,7 @@ body,
     overflow: hidden;
 }
 
-.text {
+.title {
     font-family: 'Playfair Display', serif;
     z-index: 1;
     top: 6em;

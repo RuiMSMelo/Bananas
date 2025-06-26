@@ -69,14 +69,14 @@ function Banana({ z }) {
 export default function App({ count = 100, depth = 75 }) {
     return (
         <>
-            <div className='text'>
+            <div className='title'>
                 <h1>
                     LANDING <br />
-                    PAGE —
+                    PAGE
                 </h1>
                 <h2>with React and Threejs —</h2>
             </div>
-            <p>we hope you like bananas —</p>
+            <p>we hope you like bananas</p>
             <img src='./WarholBanana-removebg-preview.png' />
 
             <Canvas
