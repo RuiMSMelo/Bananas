@@ -29,6 +29,17 @@ h2 {
     font-size: 1.1em;
 }
 
+p {
+    font-family: 'Playfair Display', serif;
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 1;
+    font-size: 1.1em;
+    text-align: center;
+    transform: scaleY(1.5);
+}
+
 img {
     position: absolute;
     z-index: 1;
