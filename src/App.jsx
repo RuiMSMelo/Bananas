@@ -8,7 +8,10 @@ import { depth } from 'three/tsl'
 function Banana({ z }) {
     const ref = useRef()
 
-    const { nodes, materials } = useGLTF('/banana-v1-transformed.glb')
+    const { nodes, materials } = useGLTF(
+        import.meta.env.BASE_URL + 'banana-v1-transformed.glb'
+    )
+
     const bananaMaterial = useMemo(() => materials.skin.clone(), [])
 
     const { viewport, camera } = useThree()
@@ -77,7 +80,12 @@ export default function App({ count = 100, depth = 75 }) {
                 <h2>with React and Threejs —</h2>
             </div>
             <p>we hope you like bananas</p>
-            <img src='./WarholBanana-removebg-preview.png' />
+            <img
+                src={
+                    import.meta.env.BASE_URL +
+                    '/WarholBanana-removebg-preview.png'
+                }
+            />
 
             <Canvas
                 gl={{ alpha: false }}
